@@ -46,7 +46,6 @@ class EventCalendar extends StatefulWidget {
 
   EventCalendar(
       {List<Event>? events,
-      canSelectViewType,
       EventDateTime? dateTime,
       this.middleWidget,
       this.calendarOptions,

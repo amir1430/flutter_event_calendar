@@ -31,7 +31,7 @@ class MyHomePage extends StatelessWidget {
       body: EventCalendar(
         calendarType: CalendarType.Jalali,
         calendarLanguage: 'fa',
-        canSelectViewType: true,
+        calendarOptions: CalendarOptions(),
         headersStyle: HeadersStyle(monthStringType: MonthStringTypes.Full),
         onChangeDateTime: (dateTime) {
           print("$dateTime");
