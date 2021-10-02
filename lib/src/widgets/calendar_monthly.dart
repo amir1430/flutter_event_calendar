@@ -44,16 +44,16 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
 
   @override
   void didChangeDependencies() {
-    currDay = CalendarUtils.getPartByInt(format: PartFormat.day);
-    currMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    currDay = CalendarUtils.getPartByInt(format: PartFormat.DAY);
+    currMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant CalendarMonthly oldWidget) {
     dayNames = Translator.getNameOfDay(headersStyle.weekDayStringType);
-    currDay = CalendarUtils.getPartByInt(format: PartFormat.day);
-    currMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    currDay = CalendarUtils.getPartByInt(format: PartFormat.DAY);
+    currMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -81,7 +81,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
             heightFactor: 1,
             child: RotatedBox(
               quarterTurns:
-                  headersStyle.weekDayStringType == WeekDayStringTypes.Full
+                  headersStyle.weekDayStringType == WeekDayStringTypes.FULL
                       ? 3
                       : 0,
               child: Text(
@@ -145,7 +145,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
   }
 
   int getFirstDayOfMonth() {
-    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     final monthDays = CalendarUtils.getMonthDays(
         HeadersStyle.of(context).weekDayStringType, currentMonth);
     return dayNames.indexOf(monthDays[1]);
@@ -158,14 +158,14 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
   }
 
   int getLastDayOfMonth() {
-    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     return CalendarUtils.getDays(headersStyle.weekDayStringType, currentMonth)
         .keys
         .last;
   }
 
   int getLastMonthLastDay() {
-    final cMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    final cMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     if (cMonth - 1 < 1) {
       return -1;
     }
@@ -182,7 +182,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
   }
 
   getYear(int month) {
-    final year = CalendarUtils.getPartByInt(format: PartFormat.year);
+    final year = CalendarUtils.getPartByInt(format: PartFormat.YEAR);
     if (month > 12)
       return year + 1;
     else if (month < 1) return year - 1;

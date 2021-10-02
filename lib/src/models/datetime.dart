@@ -9,7 +9,8 @@ class EventDateTime {
   int? second;
   Color? color;
 
-  EventDateTime({required this.year,
+  EventDateTime({
+    required this.year,
     required this.month,
     required this.day,
     this.hour,

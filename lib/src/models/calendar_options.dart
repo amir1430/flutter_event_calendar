@@ -9,8 +9,8 @@ class CalendarOptions extends Model {
 
   CalendarOptions(
       {this.toggleViewType = false,
-      this.viewType = ViewType.Monthly,
-      this.font = ''});
+      this.viewType = ViewType.MONTHLY,
+      this.font = 'DanaFont'});
 
   static CalendarOptions of(BuildContext context) =>
       ScopedModel.of<CalendarOptions>(context);

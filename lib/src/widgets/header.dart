@@ -81,7 +81,7 @@ class Header extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           child: Text(
                             '${CalendarUtils.getPartByString(
-                              format: PartFormat.month,
+                              format: PartFormat.MONTH,
                               options: HeadersStyle.of(context),
                             )}',
                             style: TextStyle(
@@ -111,7 +111,7 @@ class Header extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          '${CalendarUtils.getPartByInt(format: PartFormat.year)}',
+                          '${CalendarUtils.getPartByInt(format: PartFormat.YEAR)}',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
@@ -184,16 +184,16 @@ class Header extends StatelessWidget {
         customBorder: CircleBorder(),
         onTap: () {
           // EventCalendar.dateTime = EventCalendar.calendarProvider.getDateTime();
-          if (CalendarOptions.of(context).viewType == ViewType.Monthly)
-            CalendarOptions.of(context).viewType = ViewType.Daily;
+          if (CalendarOptions.of(context).viewType == ViewType.MONTHLY)
+            CalendarOptions.of(context).viewType = ViewType.DAILY;
           else
-            CalendarOptions.of(context).viewType = ViewType.Monthly;
+            CalendarOptions.of(context).viewType = ViewType.MONTHLY;
           onHeaderChanged.call();
         },
         child: Padding(
           padding: EdgeInsets.all(5),
           child: Icon(
-            CalendarOptions.of(context).viewType == ViewType.Monthly
+            CalendarOptions.of(context).viewType == ViewType.MONTHLY
                 ? Icons.calendar_view_month_outlined
                 : Icons.calendar_view_day_outlined,
             size: 24,

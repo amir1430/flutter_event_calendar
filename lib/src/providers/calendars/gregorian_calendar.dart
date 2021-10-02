@@ -47,13 +47,13 @@ class GregorianCalendar extends CalendarProvider {
     int dayIndex = firstDayOfMonth.weekday;
 
     switch (type) {
-      case WeekDayStringTypes.Full:
+      case WeekDayStringTypes.FULL:
         for (var i = 1; i <= monthLength; i++) {
           days[i] = Translator.getFullNameOfDays()[dayIndex % 7];
           dayIndex++;
         }
         break;
-      case WeekDayStringTypes.Short:
+      case WeekDayStringTypes.SHORT:
         for (var i = 1; i <= monthLength; i++) {
           days[i] = Translator.getShortNameOfDays()[dayIndex % 7];
           dayIndex++;
@@ -111,11 +111,11 @@ class GregorianCalendar extends CalendarProvider {
   int getDateTimePart(PartFormat format) {
     EventDateTime date = _getSelectedDate();
     switch (format) {
-      case PartFormat.year:
+      case PartFormat.YEAR:
         return date.year;
-      case PartFormat.month:
+      case PartFormat.MONTH:
         return date.month;
-      case PartFormat.day:
+      case PartFormat.DAY:
         return date.day;
     }
   }

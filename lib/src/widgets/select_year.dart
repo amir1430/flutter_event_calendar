@@ -18,7 +18,7 @@ class SelectYear extends StatelessWidget {
   late VoidCallback scrollToPositionCallback;
 
   final int selectedYear =
-      CalendarUtils.getPartByInt(format: PartFormat.year);
+      CalendarUtils.getPartByInt(format: PartFormat.YEAR);
 
   late BoxDecoration selectedDecoration;
 

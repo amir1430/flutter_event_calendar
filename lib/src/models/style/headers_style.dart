@@ -7,8 +7,8 @@ class HeadersStyle extends Model {
   MonthStringTypes monthStringType;
 
   HeadersStyle({
-    this.weekDayStringType = WeekDayStringTypes.Full,
-    this.monthStringType = MonthStringTypes.Short,
+    this.weekDayStringType = WeekDayStringTypes.FULL,
+    this.monthStringType = MonthStringTypes.SHORT,
   });
 
   static HeadersStyle of(BuildContext context) =>

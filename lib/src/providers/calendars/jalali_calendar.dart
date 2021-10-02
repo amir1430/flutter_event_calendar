@@ -58,13 +58,13 @@ class JalaliCalendar extends CalendarProvider {
     Jalali firstDayOfMonth = _getSelectedDate().withMonth(index).withDay(1);
     int dayIndex = firstDayOfMonth.weekDay - 1;
     switch (type) {
-      case WeekDayStringTypes.Full:
+      case WeekDayStringTypes.FULL:
         for (var i = 1; i <= firstDayOfMonth.monthLength; i++) {
           days[i] = Translator.getFullNameOfDays()[dayIndex % 7];
           dayIndex++;
         }
         break;
-      case WeekDayStringTypes.Short:
+      case WeekDayStringTypes.SHORT:
         for (var i = 1; i <= firstDayOfMonth.monthLength; i++) {
           days[i] = Translator.getShortNameOfDays()[dayIndex % 7];
           dayIndex++;
@@ -116,11 +116,11 @@ class JalaliCalendar extends CalendarProvider {
   int getDateTimePart(PartFormat format) {
     Jalali date = _getSelectedDate();
     switch (format) {
-      case PartFormat.year:
+      case PartFormat.YEAR:
         return date.year;
-      case PartFormat.month:
+      case PartFormat.MONTH:
         return date.month;
-      case PartFormat.day:
+      case PartFormat.DAY:
         return date.day;
     }
   }

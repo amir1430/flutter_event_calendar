@@ -67,8 +67,8 @@ class EventCalendar extends StatefulWidget {
 
     EventCalendar.events = events ?? [];
     EventCalendar.dateTime = dateTime ?? calendarProvider.getDateTime();
-    EventCalendar.calendarType = calendarType ?? CalendarType.Gregorian;
-    EventCalendar.calendarLanguage = calendarLanguage ?? 'en';
+    EventCalendar.calendarType = calendarType ?? CalendarType.GREGORIAN;
+    EventCalendar.calendarLanguage = calendarLanguage ?? 'fa';
   }
 
   @override
@@ -120,7 +120,7 @@ class _EventCalendarState extends State<EventCalendar> {
   }
 
   isMonthlyView() {
-    return widget.calendarOptions?.viewType == ViewType.Monthly;
+    return widget.calendarOptions?.viewType == ViewType.MONTHLY;
   }
 
   buildScopeModels({required Container child}) {

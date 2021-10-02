@@ -22,7 +22,7 @@ class CalendarDaily extends StatelessWidget {
       required this.disabledDays})
       : super() {
     dayIndex =
-        CalendarUtils.getPartByInt(format: PartFormat.day);
+        CalendarUtils.getPartByInt(format: PartFormat.DAY);
   }
 
   @override
@@ -30,7 +30,7 @@ class CalendarDaily extends StatelessWidget {
     animatedTo = ScrollController(
         initialScrollOffset:
             (HeadersStyle.of(context).weekDayStringType ==
-                        WeekDayStringTypes.Full
+                        WeekDayStringTypes.FULL
                     ? 80.0
                     : 60.0) *
                 (dayIndex - 1));
@@ -38,7 +38,7 @@ class CalendarDaily extends StatelessWidget {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animatedTo.animateTo(
           (HeadersStyle.of(context).weekDayStringType ==
-                      WeekDayStringTypes.Full
+                      WeekDayStringTypes.FULL
                   ? 80.0
                   : 60.0) *
               (dayIndex - 1),
@@ -111,16 +111,16 @@ class CalendarDaily extends StatelessWidget {
 
   List<Widget> daysMaker(BuildContext context) {
     final currentMonth =
-        CalendarUtils.getPartByInt(format: PartFormat.month);
+        CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     final currentYear =
-        CalendarUtils.getPartByInt(format: PartFormat.year);
+        CalendarUtils.getPartByInt(format: PartFormat.YEAR);
 
     final headersStyle = HeadersStyle.of(context);
 
     List<Widget> days = [
       SizedBox(
           width: headersStyle.weekDayStringType ==
-                  WeekDayStringTypes.Full
+                  WeekDayStringTypes.FULL
               ? 80
               : 60)
     ];
@@ -150,7 +150,7 @@ class CalendarDaily extends StatelessWidget {
 
     days.add(SizedBox(
         width: headersStyle.weekDayStringType ==
-                WeekDayStringTypes.Full
+                WeekDayStringTypes.FULL
             ? 80
             : 60));
 

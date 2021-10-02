@@ -75,7 +75,7 @@ class Day extends StatelessWidget {
             padding: mini
                 ? EdgeInsets.all(0)
                 : (EdgeInsets.all(HeadersStyle.of(context).weekDayStringType ==
-                        WeekDayStringTypes.Full
+                        WeekDayStringTypes.FULL
                     ? 4
                     : 0)),
             decoration: BoxDecoration(
@@ -100,11 +100,11 @@ class Day extends StatelessWidget {
                 ),
                 Align(
                   alignment: dayStyle.eventCounterViewType ==
-                          DayEventCountViewType.DOT
+                          DayEventCounterViewType.DOT
                       ? Alignment.bottomCenter
                       : Alignment.bottomRight,
                   child: dayStyle.eventCounterViewType ==
-                          DayEventCountViewType.DOT
+                          DayEventCounterViewType.DOT
                       ? dotMaker(context)
                       : labelMaker(context),
                 ),
@@ -121,7 +121,7 @@ class Day extends StatelessWidget {
       width: mini
           ? 45
           : (HeadersStyle.of(context).weekDayStringType ==
-                  WeekDayStringTypes.Full
+                  WeekDayStringTypes.FULL
               ? 80
               : 60),
       child: child,
@@ -137,7 +137,7 @@ class Day extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(
               bottom: HeadersStyle.of(context).weekDayStringType ==
-                      WeekDayStringTypes.Short
+                      WeekDayStringTypes.SHORT
                   ? (mini ? 4 : 8)
                   : 2),
           width: 5,

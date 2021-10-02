@@ -10,7 +10,7 @@ class DayStyle extends Model{
   Color selectedTextColor;
   Color unselectedTextColor;
   Color eventCounterColor;
-  DayEventCountViewType eventCounterViewType;
+  DayEventCounterViewType eventCounterViewType;
   Color eventCounterTextColor;
 
   DayStyle(
@@ -21,7 +21,7 @@ class DayStyle extends Model{
       this.selectedTextColor = Colors.white,
       this.unselectedTextColor = Colors.black,
       this.eventCounterColor =  Colors.red,
-      this.eventCounterViewType = DayEventCountViewType.LABEL,
+      this.eventCounterViewType = DayEventCounterViewType.LABEL,
       this.eventCounterTextColor = Colors.white});
 
   static DayStyle of(BuildContext context) =>
