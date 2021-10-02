@@ -82,7 +82,7 @@ class Header extends StatelessWidget {
                           child: Text(
                             '${CalendarUtils.getPartByString(
                               format: PartFormat.MONTH,
-                              options: HeadersStyle.of(context),
+                              options: HeaderStyle.of(context),
                             )}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,

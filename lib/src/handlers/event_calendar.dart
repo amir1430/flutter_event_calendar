@@ -40,7 +40,7 @@ class EventCalendar extends StatefulWidget {
 
   EventStyle? eventStyle;
 
-  HeadersStyle? headersStyle;
+  HeaderStyle? headerStyle;
 
   Widget? Function(EventDateTime)? middleWidget;
 
@@ -51,7 +51,7 @@ class EventCalendar extends StatefulWidget {
       this.calendarOptions,
       this.dayStyle,
       this.eventStyle,
-      this.headersStyle,
+      this.headerStyle,
       this.enabledDays = const [],
       this.disabledDays = const [],
       this.colorizedDays = const [],
@@ -61,7 +61,7 @@ class EventCalendar extends StatefulWidget {
     calendarProvider = createInstance(calendarType);
 
     if (this.calendarOptions == null) this.calendarOptions = CalendarOptions();
-    if (this.headersStyle == null) this.headersStyle = HeadersStyle();
+    if (this.headerStyle == null) this.headerStyle = HeaderStyle();
     if (this.eventStyle == null) this.eventStyle = EventStyle();
     if (this.dayStyle == null) this.dayStyle = DayStyle();
 
@@ -130,8 +130,8 @@ class _EventCalendarState extends State<EventCalendar> {
         model: widget.dayStyle!,
         child: ScopedModel<EventStyle>(
           model: widget.eventStyle!,
-          child: ScopedModel<HeadersStyle>(
-            model: widget.headersStyle!,
+          child: ScopedModel<HeaderStyle>(
+            model: widget.headerStyle!,
             child: child,
           ),
         ),

@@ -74,7 +74,7 @@ class Day extends StatelessWidget {
             curve: Curves.ease,
             padding: mini
                 ? EdgeInsets.all(0)
-                : (EdgeInsets.all(HeadersStyle.of(context).weekDayStringType ==
+                : (EdgeInsets.all(HeaderStyle.of(context).weekDayStringType ==
                         WeekDayStringTypes.FULL
                     ? 4
                     : 0)),
@@ -120,7 +120,7 @@ class Day extends StatelessWidget {
       padding: EdgeInsets.all(mini ? 0 : 10),
       width: mini
           ? 45
-          : (HeadersStyle.of(context).weekDayStringType ==
+          : (HeaderStyle.of(context).weekDayStringType ==
                   WeekDayStringTypes.FULL
               ? 80
               : 60),
@@ -136,7 +136,7 @@ class Day extends StatelessWidget {
       widgets.add(
         Container(
           margin: EdgeInsets.only(
-              bottom: HeadersStyle.of(context).weekDayStringType ==
+              bottom: HeaderStyle.of(context).weekDayStringType ==
                       WeekDayStringTypes.SHORT
                   ? (mini ? 4 : 8)
                   : 2),

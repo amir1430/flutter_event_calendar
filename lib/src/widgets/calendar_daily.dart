@@ -29,7 +29,7 @@ class CalendarDaily extends StatelessWidget {
   Widget build(BuildContext context) {
     animatedTo = ScrollController(
         initialScrollOffset:
-            (HeadersStyle.of(context).weekDayStringType ==
+            (HeaderStyle.of(context).weekDayStringType ==
                         WeekDayStringTypes.FULL
                     ? 80.0
                     : 60.0) *
@@ -37,7 +37,7 @@ class CalendarDaily extends StatelessWidget {
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animatedTo.animateTo(
-          (HeadersStyle.of(context).weekDayStringType ==
+          (HeaderStyle.of(context).weekDayStringType ==
                       WeekDayStringTypes.FULL
                   ? 80.0
                   : 60.0) *
@@ -115,7 +115,7 @@ class CalendarDaily extends StatelessWidget {
     final currentYear =
         CalendarUtils.getPartByInt(format: PartFormat.YEAR);
 
-    final headersStyle = HeadersStyle.of(context);
+    final headersStyle = HeaderStyle.of(context);
 
     List<Widget> days = [
       SizedBox(

@@ -48,7 +48,7 @@ class CalendarUtils {
       EventCalendar.calendarProvider.getMonthDays(type, monthIndex);
 
   static getPartByString(
-      {required PartFormat format, required HeadersStyle options}) {
+      {required PartFormat format, required HeaderStyle options}) {
     return Translator.getPartTranslate(options, format,
         EventCalendar.calendarProvider.getDateTimePart(format) - 1);
   }

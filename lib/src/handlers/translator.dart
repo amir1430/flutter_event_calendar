@@ -5,7 +5,7 @@ import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
 import '../dictionaries/dictionary.dart';
 
 class Translator {
-  static String getPartTranslate(HeadersStyle options, format, index) {
+  static String getPartTranslate(HeaderStyle options, format, index) {
     switch (format) {
       case PartFormat.MONTH:
         return _getMonthName(options.monthStringType, index);

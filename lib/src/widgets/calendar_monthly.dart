@@ -31,13 +31,13 @@ class CalendarMonthly extends StatefulWidget {
 class _CalendarMonthlyState extends State<CalendarMonthly> {
   EventSelector eventSelector = EventSelector();
   late List<String> dayNames;
-  late HeadersStyle headersStyle;
+  late HeaderStyle headersStyle;
   int currDay = -1;
   int currMonth = -1;
 
   @override
   void initState() {
-    headersStyle = HeadersStyle.of(context);
+    headersStyle = HeaderStyle.of(context);
     dayNames = Translator.getNameOfDay(headersStyle.weekDayStringType);
     super.initState();
   }
@@ -147,7 +147,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
   int getFirstDayOfMonth() {
     final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
     final monthDays = CalendarUtils.getMonthDays(
-        HeadersStyle.of(context).weekDayStringType, currentMonth);
+        HeaderStyle.of(context).weekDayStringType, currentMonth);
     return dayNames.indexOf(monthDays[1]);
   }
 
