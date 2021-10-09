@@ -17,6 +17,7 @@ class Day extends StatelessWidget {
   int day;
   Color? color;
   late DayStyle dayStyle;
+  late double opacity;
   Day(
       {required this.day,
       required this.weekDay,
@@ -37,12 +38,12 @@ class Day extends StatelessWidget {
   Widget build(BuildContext context) {
     dayStyle = DayStyle.of(context);
 
+    opacity = _shouldHaveTransparentColor() ? 0.3 : 1;
+
+
     textColor = selected
         ? dayStyle.selectedTextColor
-        : (_shouldHaveTransparentColor()
-            ? (color ?? dayStyle.unselectedTextColor)
-                .withOpacity(0.3)
-            : (color ?? dayStyle.unselectedTextColor));
+        : (color ?? dayStyle.unselectedTextColor.withOpacity(opacity));
 
     child = InkWell(
       onTap: (() {
@@ -144,9 +145,7 @@ class Day extends StatelessWidget {
           height: 5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _shouldHaveTransparentColor()
-                ? dayStyle.eventCounterColor.withOpacity(0.4)
-                : dayStyle.eventCounterColor,
+            color: dayStyle.eventCounterColor.withOpacity(opacity),
           ),
         ),
       );
@@ -167,9 +166,7 @@ class Day extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: _shouldHaveTransparentColor()
-            ? dayStyle.eventCounterColor.withOpacity(0.3)
-            : dayStyle.eventCounterColor,
+        color: dayStyle.eventCounterColor.withOpacity(opacity),
       ),
       child: Text(
         "${dayEvents.length >= 10 ? '+9' : dayEvents.length}",
