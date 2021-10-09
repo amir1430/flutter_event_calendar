@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
+import 'package:flutter_event_calendar/src/handlers/calendar_monthly_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
@@ -75,7 +76,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
           ? TextDirection.rtl
           : TextDirection.ltr,
       children: List.generate(7, (index) {
-        final dayName = getDayNameOfMonth(EventCalendar.dateTime.day);
+        final dayName = CalendarMonthlyUtils.getDayNameOfMonth(headersStyle,currMonth,EventCalendar.dateTime.day);
         return Expanded(
           child: Center(
             heightFactor: 1,
@@ -99,9 +100,9 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
   }
 
   _buildMonthView() {
-    final int firstDayIndex = getFirstDayOfMonth();
-    final int lastDayIndex = firstDayIndex + getLastDayOfMonth();
-    final lastMonthLastDay = getLastMonthLastDay();
+    final int firstDayIndex = CalendarMonthlyUtils.getFirstDayOfMonth(dayNames,headersStyle);
+    final int lastDayIndex = firstDayIndex + CalendarMonthlyUtils.getLastDayOfMonth(headersStyle);
+    final lastMonthLastDay = CalendarMonthlyUtils.getLastMonthLastDay(headersStyle);
 
     return SizedBox(
       height: 7 * 40,
@@ -144,130 +145,82 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
     return SizedBox();
   }
 
-  int getFirstDayOfMonth() {
-    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
-    final monthDays = CalendarUtils.getMonthDays(
-        HeaderStyle.of(context).weekDayStringType, currentMonth);
-    return dayNames.indexOf(monthDays[1]);
-  }
-
-  String getDayNameOfMonth(index) {
-    final dayName = EventCalendar.calendarProvider
-        .getMonthDays(headersStyle.weekDayStringType, currMonth)[index];
-    return dayName;
-  }
-
-  int getLastDayOfMonth() {
-    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
-    return CalendarUtils.getDays(headersStyle.weekDayStringType, currentMonth)
-        .keys
-        .last;
-  }
-
-  int getLastMonthLastDay() {
-    final cMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
-    if (cMonth - 1 < 1) {
-      return -1;
-    }
-    return CalendarUtils.getDays(headersStyle.weekDayStringType, cMonth - 1)
-        .keys
-        .last;
-  }
-
-  getMonth(int month) {
-    if (month > 12)
-      return 1;
-    else if (month < 1) return 1;
-    return month;
-  }
-
-  getYear(int month) {
-    final year = CalendarUtils.getPartByInt(format: PartFormat.YEAR);
-    if (month > 12)
-      return year + 1;
-    else if (month < 1) return year - 1;
-    return year;
-  }
 
   buildCurrentMonthDay(day) {
-    final curYear = getYear(currMonth);
+    final curYear = CalendarMonthlyUtils.getYear(currMonth);
     final isEnable = isDayEnabled(curYear, currMonth, day);
 
     final EventDateTime? colorizedDay = CalendarUtils.getColorizedDay(
         widget.colorizedDays, curYear, currMonth, day);
 
-    return Center(
-      child: Day(
-        dayEvents: eventSelector.getEventsByDayMonthYear(
-          EventDateTime(year: curYear, month: currMonth, day: day),
-        ),
-        day: day,
-        weekDay: '',
-        color: colorizedDay?.color,
-        enabled: isEnable,
-        selected: day == currDay,
-        onCalendarChanged: () {
-          CalendarUtils.goToDay(day);
-          widget.onCalendarChanged.call();
-        },
-        mini: true,
+    return Day(
+      dayEvents: eventSelector.getEventsByDayMonthYear(
+        EventDateTime(year: curYear, month: currMonth, day: day),
       ),
+      day: day,
+      weekDay: '',
+      color: colorizedDay?.color,
+      enabled: isEnable,
+      selected: day == currDay,
+      onCalendarChanged: () {
+        CalendarUtils.goToDay(day);
+        widget.onCalendarChanged.call();
+      },
+      mini: true,
     );
   }
 
   buildNextMonthDay(int day) {
-    final year = getYear(currMonth + 1);
-    final month = getMonth(currMonth + 1);
+    final year = CalendarMonthlyUtils.getYear(currMonth + 1);
+    final month = CalendarMonthlyUtils.getMonth(currMonth + 1);
     final isEnable = isDayEnabled(year, month, day);
 
     final EventDateTime? colorizedDay =
         CalendarUtils.getColorizedDay(widget.colorizedDays, year, month, day);
 
-    return Center(
-        child: Day(
-            day: day,
-            useUnselectedEffect: true,
-            weekDay: '',
-            color: colorizedDay?.color,
-            dayEvents: eventSelector.getEventsByDayMonthYear(EventDateTime(
-                year: year, month: getMonth(currMonth + 1), day: day)),
-            enabled: isEnable,
-            onCalendarChanged: () {
-              // reset to first to fix switching between 31/30/29 month lengths
-              CalendarUtils.nextMonth();
-              CalendarUtils.goToDay(day);
-              widget.onCalendarChanged.call();
-            },
-            selected: false,
-            mini: true));
+    return Day(
+        day: day,
+        useUnselectedEffect: true,
+        weekDay: '',
+        color: colorizedDay?.color,
+        dayEvents: eventSelector.getEventsByDayMonthYear(EventDateTime(
+            year: year, month: month, day: day),),
+        enabled: isEnable,
+        onCalendarChanged: () {
+          // reset to first to fix switching between 31/30/29 month lengths
+          CalendarUtils.nextMonth();
+          CalendarUtils.goToDay(day);
+          widget.onCalendarChanged.call();
+        },
+        selected: false,
+        mini: true);
   }
 
   buildPrevMonthDay(int day) {
-    final year = getYear(currMonth - 1);
-    final month = getMonth(currMonth - 1);
+    final year = CalendarMonthlyUtils.getYear(currMonth - 1);
+    final month = CalendarMonthlyUtils.getMonth(currMonth - 1);
 
     final isEnable = isDayEnabled(year, month, day);
 
     final EventDateTime? colorizedDay =
         CalendarUtils.getColorizedDay(widget.colorizedDays, year, month, day);
 
-    return Center(
-        child: Day(
-            day: day,
-            useUnselectedEffect: true,
-            dayEvents: eventSelector.getEventsByDayMonthYear(
-                EventDateTime(year: year, month: month, day: day)),
-            weekDay: '',
-            color: colorizedDay?.color,
-            enabled: isEnable,
-            onCalendarChanged: () {
-              // reset to first to fix switching between 31/30/29 month lengths
-              CalendarUtils.previousMonth();
-              CalendarUtils.goToDay(day);
-              widget.onCalendarChanged.call();
-            },
-            selected: false,
-            mini: true));
+    return Day(
+        day: day,
+        useUnselectedEffect: true,
+        dayEvents: eventSelector.getEventsByDayMonthYear(
+            EventDateTime(year: year, month: month, day: day)),
+        weekDay: '',
+        color: colorizedDay?.color,
+        enabled: isEnable,
+        onCalendarChanged: () {
+          // reset to first to fix switching between 31/30/29 month lengths
+          CalendarUtils.previousMonth();
+          CalendarUtils.goToDay(day);
+          widget.onCalendarChanged.call();
+        },
+        selected: false,
+        mini: true);
   }
 
   isDayEnabled(curYear, int currMonth, day) {
