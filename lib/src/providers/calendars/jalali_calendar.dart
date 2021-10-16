@@ -8,44 +8,44 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 class JalaliCalendar extends CalendarProvider {
   @override
-  EventDateTime getDateTime() {
+  CalendarDateTime getDateTime() {
     final f = Jalali.now().formatter;
 
-    return EventDateTime(
+    return CalendarDateTime(
         year: int.parse(f.yyyy), month: int.parse(f.mm), day: int.parse(f.dd));
   }
 
   @override
-  EventDateTime getNextMonthDateTime() {
+  CalendarDateTime getNextMonthDateTime() {
     final date = _getSelectedDate();
     final newDate = date.withDay(1).addMonths(1);
     final f = newDate.formatter;
-    return EventDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: 01);
+    return CalendarDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: 01);
   }
 
   @override
-  EventDateTime getPreviousMonthDateTime() {
+  CalendarDateTime getPreviousMonthDateTime() {
     final date = _getSelectedDate();
     dynamic newDate = date.withDay(1).addMonths(-1);
     final f = newDate.formatter;
-    return EventDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: 01);
+    return CalendarDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: 01);
   }
 
   @override
-  EventDateTime getPreviousDayDateTime() {
+  CalendarDateTime getPreviousDayDateTime() {
     dynamic date = _getSelectedDate();
     dynamic newDate = date.addDays(-1);
     final f = newDate.formatter;
-    return EventDateTime(
+    return CalendarDateTime(
         year: int.parse(f.y), month: int.parse(f.mm), day: int.parse(f.dd));
   }
 
   @override
-  EventDateTime getNextDayDateTime() {
+  CalendarDateTime getNextDayDateTime() {
     dynamic date = _getSelectedDate();
     dynamic newDate = date.addDays(1);
     final f = newDate.formatter;
-    return EventDateTime(
+    return CalendarDateTime(
         year: int.parse(f.y), month: int.parse(f.mm), day: int.parse(f.dd));
   }
 
@@ -92,24 +92,24 @@ class JalaliCalendar extends CalendarProvider {
   }
 
   @override
-  EventDateTime goToDay(index) {
+  CalendarDateTime goToDay(index) {
     dynamic date = _getSelectedDate();
     final f = date.formatter;
-    return EventDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: index);
+    return CalendarDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: index);
   }
 
   @override
-  EventDateTime goToMonth(index) {
+  CalendarDateTime goToMonth(index) {
     dynamic date = _getSelectedDate();
     final f = date.formatter;
-    return EventDateTime(year: int.parse(f.y), month: index, day: 01);
+    return CalendarDateTime(year: int.parse(f.y), month: index, day: 01);
   }
 
   @override
-  EventDateTime goToYear(index) {
+  CalendarDateTime goToYear(index) {
     dynamic date = _getSelectedDate();
     final f = date.formatter;
-    return EventDateTime(year: index, month: int.parse(f.mm), day: 01);
+    return CalendarDateTime(year: index, month: int.parse(f.mm), day: 01);
   }
 
   @override

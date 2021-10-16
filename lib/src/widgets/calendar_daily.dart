@@ -3,7 +3,7 @@ import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
+import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
 import 'package:flutter_event_calendar/src/widgets/day.dart';
 
 class CalendarDaily extends StatelessWidget {
@@ -11,33 +11,27 @@ class CalendarDaily extends StatelessWidget {
   var dayIndex;
   late ScrollController animatedTo;
   EventSelector selector = EventSelector();
-  List<EventDateTime> enabledDays;
-  List<EventDateTime> disabledDays;
-  List<EventDateTime> colorizedDays;
+  List<CalendarDateTime> specialDays;
 
   CalendarDaily(
       {this.onCalendarChanged,
-      required this.enabledDays,
-      required this.colorizedDays,
-      required this.disabledDays})
+      required this.specialDays})
       : super() {
-    dayIndex =
-        CalendarUtils.getPartByInt(format: PartFormat.DAY);
+    dayIndex = CalendarUtils.getPartByInt(format: PartFormat.DAY);
   }
 
   @override
   Widget build(BuildContext context) {
     animatedTo = ScrollController(
-        initialScrollOffset:
-            (HeaderStyle.of(context).weekDayStringType ==
-                        WeekDayStringTypes.FULL
-                    ? 80.0
-                    : 60.0) *
-                (dayIndex - 1));
+        initialScrollOffset: (HeaderOptions.of(context).weekDayStringType ==
+                    WeekDayStringTypes.FULL
+                ? 80.0
+                : 60.0) *
+            (dayIndex - 1));
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animatedTo.animateTo(
-          (HeaderStyle.of(context).weekDayStringType ==
+          (HeaderOptions.of(context).weekDayStringType ==
                       WeekDayStringTypes.FULL
                   ? 80.0
                   : 60.0) *
@@ -110,17 +104,14 @@ class CalendarDaily extends StatelessWidget {
   }
 
   List<Widget> daysMaker(BuildContext context) {
-    final currentMonth =
-        CalendarUtils.getPartByInt(format: PartFormat.MONTH);
-    final currentYear =
-        CalendarUtils.getPartByInt(format: PartFormat.YEAR);
+    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.MONTH);
+    final currentYear = CalendarUtils.getPartByInt(format: PartFormat.YEAR);
 
-    final headersStyle = HeaderStyle.of(context);
+    final headersStyle = HeaderOptions.of(context);
 
     List<Widget> days = [
       SizedBox(
-          width: headersStyle.weekDayStringType ==
-                  WeekDayStringTypes.FULL
+          width: headersStyle.weekDayStringType == WeekDayStringTypes.FULL
               ? 80
               : 60)
     ];
@@ -129,18 +120,23 @@ class CalendarDaily extends StatelessWidget {
 
     CalendarUtils.getDays(headersStyle.weekDayStringType, currentMonth)
         .forEach((index, weekDay) {
-      final isEnable = isEnabledDay(currentYear, currentMonth, index) &&
-          !isDisabledDay(currentYear, currentMonth, index);
+
+      final CalendarDateTime? specialDay =
+      CalendarUtils.getFromSpecialDay(specialDays, currentYear, currentMonth, index);
 
       var selected = index == day ? true : false;
       days.add(Day(
         day: index,
         dayEvents: selector.getEventsByDayMonthYear(
-            EventDateTime(year: currentYear, month: currentMonth, day: index)),
-        mini: false,
-        enabled: isEnable,
+          CalendarDateTime(year: currentYear, month: currentMonth, day: index),
+        ),
+        dayStyle: DayStyle(
+          mini: false,
+          enabled: specialDay?.isEnableDay ?? false,
+          selected: selected,
+          useUnselectedEffect: true,
+        ),
         weekDay: weekDay,
-        selected: selected,
         onCalendarChanged: () {
           CalendarUtils.goToDay(index);
           onCalendarChanged?.call();
@@ -149,36 +145,35 @@ class CalendarDaily extends StatelessWidget {
     });
 
     days.add(SizedBox(
-        width: headersStyle.weekDayStringType ==
-                WeekDayStringTypes.FULL
+        width: headersStyle.weekDayStringType == WeekDayStringTypes.FULL
             ? 80
             : 60));
 
     return days;
   }
 
-  bool isEnabledDay(int cYear, int cMonth, int day) {
-    if (enabledDays.isEmpty) return true;
-    return enabledDays
-            .where(
-              (element) =>
-                  element.year == cYear &&
-                  element.month == cMonth &&
-                  element.day == day,
-            )
-            .length !=
-        0;
-  }
-
-  bool isDisabledDay(cYear, cMonth, int day) {
-    return disabledDays
-            .where(
-              (element) =>
-                  element.year == cYear &&
-                  element.month == cMonth &&
-                  element.day == day,
-            )
-            .length !=
-        0;
-  }
+  // bool isEnabledDay(int cYear, int cMonth, int day) {
+  //   if (enabledDays.isEmpty) return true;
+  //   return enabledDays
+  //           .where(
+  //             (element) =>
+  //                 element.year == cYear &&
+  //                 element.month == cMonth &&
+  //                 element.day == day,
+  //           )
+  //           .length !=
+  //       0;
+  // }
+  //
+  // bool isDisabledDay(cYear, cMonth, int day) {
+  //   return disabledDays
+  //           .where(
+  //             (element) =>
+  //                 element.year == cYear &&
+  //                 element.month == cMonth &&
+  //                 element.day == day,
+  //           )
+  //           .length !=
+  //       0;
+  // }
 }

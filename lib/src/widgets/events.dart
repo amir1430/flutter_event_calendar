@@ -5,18 +5,18 @@ import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
 import 'package:flutter_event_calendar/src/handlers/translator.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/style/event_style.dart';
+import 'package:flutter_event_calendar/src/models/style/event_options.dart';
 import 'package:flutter_event_calendar/src/widgets/event_card.dart';
 
 class Events extends StatelessWidget {
   Function onEventsChanged;
-  late EventStyle eventStyle;
+  late EventOptions eventStyle;
 
   Events({required this.onEventsChanged});
 
   @override
   Widget build(BuildContext context) {
-    eventStyle = EventStyle.of(context);
+    eventStyle = EventOptions.of(context);
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(5),

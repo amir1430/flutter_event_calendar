@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
+import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
 import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
 import 'translator.dart';
 import 'package:collection/collection.dart';
@@ -48,7 +48,7 @@ class CalendarUtils {
       EventCalendar.calendarProvider.getMonthDays(type, monthIndex);
 
   static getPartByString(
-      {required PartFormat format, required HeaderStyle options}) {
+      {required PartFormat format, required HeaderOptions options}) {
     return Translator.getPartTranslate(options, format,
         EventCalendar.calendarProvider.getDateTimePart(format) - 1);
   }
@@ -57,25 +57,48 @@ class CalendarUtils {
     return EventCalendar.calendarProvider.getDateTimePart(format);
   }
 
-  static EventDateTime? getColorizedDay(
-      List<EventDateTime> colorizedDays, int year, int month, int day) {
-    final result = colorizedDays.firstWhereOrNull(
-        (element) => element.isDateEqualByInt(year, month, day));
-
-    return result;
+  static CalendarDateTime? getFromSpecialDay(
+      List<CalendarDateTime> specialDays, int year, int month, int day) {
+    return specialDays.firstWhereOrNull((element) => _isRange(element)
+        ? isInRange(element, year, month, day)
+        : element.isDateEqualByInt(year, month, day));
   }
 
-  static bool isDisabledDay(
-      List<EventDateTime> disabledDays, year, month, day) {
-    return disabledDays.firstWhereOrNull(
-            (element) => element.isDateEqualByInt(year, month, day)) !=
-        null;
-  }
+  static _isRange(CalendarDateTime element) =>
+      element.toMonth != null || element.toDay != null;
 
-  static bool isEnabledDay(List<EventDateTime> enabledDays, year, month, day) {
-    if (enabledDays.isEmpty) return true;
-    return enabledDays.firstWhereOrNull(
-            (element) => element.isDateEqualByInt(year, month, day)) !=
-        null;
+  static isEndOfRange(
+          CalendarDateTime? element, int year, int month, int day) =>
+      element?.year == year &&
+      (element?.toMonth == month || element?.month == month) &&
+      element?.toDay == day;
+
+  static isStartOfRange(
+          CalendarDateTime? element, int year, int month, int day) =>
+      element?.year == year && element?.month == month && element?.day == day;
+
+  static isInRange(
+      CalendarDateTime? selectedDatetime, int year, int month, int day) {
+    if (selectedDatetime?.year != year)
+      return false;
+    if (selectedDatetime?.month != null && selectedDatetime!.month > month)
+      return false;
+    if (selectedDatetime?.toMonth != null && selectedDatetime!.toMonth! < month)
+      return false;
+    if (selectedDatetime?.day != null && selectedDatetime!.month == month && selectedDatetime.day > day)
+      return false;
+
+    if (selectedDatetime?.toMonth != null) {
+      if (selectedDatetime!.toDay != null &&
+          selectedDatetime.toMonth == month &&
+          selectedDatetime.toDay! < day)
+        return false;
+    }else{
+      if (selectedDatetime!.toDay != null &&
+          selectedDatetime.month == month &&
+          selectedDatetime.toDay! < day)
+        return false;
+    }
+    return true;
   }
 }

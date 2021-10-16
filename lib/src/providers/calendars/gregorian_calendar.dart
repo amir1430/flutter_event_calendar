@@ -5,34 +5,34 @@ import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
 
 class GregorianCalendar extends CalendarProvider {
   @override
-  EventDateTime getDateTime() {
-    return EventDateTime.parse(DateTime.now().toString())!;
+  CalendarDateTime getDateTime() {
+    return CalendarDateTime.parse(DateTime.now().toString())!;
   }
 
   @override
-  EventDateTime getNextMonthDateTime() {
+  CalendarDateTime getNextMonthDateTime() {
     final date = _getSelectedDate();
-    return EventDateTime.parse(
+    return CalendarDateTime.parse(
         DateTime(date.year, date.month + 1, 1).toString())!;
   }
 
   @override
-  EventDateTime getPreviousMonthDateTime() {
+  CalendarDateTime getPreviousMonthDateTime() {
     final date = _getSelectedDate();
-    return EventDateTime.parse(
+    return CalendarDateTime.parse(
         DateTime(date.year, date.month - 1, 1).toString())!;
   }
 
   @override
-  EventDateTime getPreviousDayDateTime() {
+  CalendarDateTime getPreviousDayDateTime() {
     final date = _getSelectedDate();
-    return EventDateTime(year: date.year, month: date.month, day: date.day - 1);
+    return CalendarDateTime(year: date.year, month: date.month, day: date.day - 1);
   }
 
   @override
-  EventDateTime getNextDayDateTime() {
+  CalendarDateTime getNextDayDateTime() {
     final date = _getSelectedDate();
-    return EventDateTime(year: date.year, month: date.month, day: date.day + 1);
+    return CalendarDateTime(year: date.year, month: date.month, day: date.day + 1);
   }
 
   @override
@@ -41,7 +41,7 @@ class GregorianCalendar extends CalendarProvider {
   @override
   Map getMonthDays(WeekDayStringTypes type, int index) {
     Map days = {};
-    EventDateTime now = _getSelectedDate();
+    CalendarDateTime now = _getSelectedDate();
     int monthLength = DateTime(now.year, index + 1, 0).day;
     DateTime firstDayOfMonth = DateTime(now.year, index, 1);
     int dayIndex = firstDayOfMonth.weekday;
@@ -66,7 +66,7 @@ class GregorianCalendar extends CalendarProvider {
   @override
   Map getMonthDaysShort(int index) {
     Map days = {};
-    EventDateTime now = _getSelectedDate();
+    CalendarDateTime now = _getSelectedDate();
     int monthLength = DateTime(now.year, index + 1, 0).day;
     DateTime firstDayOfMonth = DateTime(now.year, index, 1);
     int dayIndex = firstDayOfMonth.weekday;
@@ -85,31 +85,31 @@ class GregorianCalendar extends CalendarProvider {
     return years;
   }
 
-  EventDateTime _getSelectedDate() {
+  CalendarDateTime _getSelectedDate() {
     return EventCalendar.dateTime;
   }
 
   @override
-  EventDateTime goToDay(index) {
+  CalendarDateTime goToDay(index) {
     dynamic date = _getSelectedDate();
-    return EventDateTime(year: date.year, month: date.month, day: index);
+    return CalendarDateTime(year: date.year, month: date.month, day: index);
   }
 
   @override
-  EventDateTime goToMonth(index) {
+  CalendarDateTime goToMonth(index) {
     dynamic date = _getSelectedDate();
-    return EventDateTime(year: date.year, month: index, day: 1);
+    return CalendarDateTime(year: date.year, month: index, day: 1);
   }
 
   @override
-  EventDateTime goToYear(index) {
+  CalendarDateTime goToYear(index) {
     dynamic date = _getSelectedDate();
-    return EventDateTime(year: index, month: date.month, day: 1);
+    return CalendarDateTime(year: index, month: date.month, day: 1);
   }
 
   @override
   int getDateTimePart(PartFormat format) {
-    EventDateTime date = _getSelectedDate();
+    CalendarDateTime date = _getSelectedDate();
     switch (format) {
       case PartFormat.YEAR:
         return date.year;

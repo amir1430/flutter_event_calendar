@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class EventStyle extends Model {
+class EventOptions extends Model {
   String? emptyText;
   Color emptyTextColor;
   IconData emptyIcon;
@@ -12,7 +12,7 @@ class EventStyle extends Model {
   Color descriptionColor;
   Color dateTimeColor;
 
-  EventStyle(
+  EventOptions(
       {this.emptyText,
       this.emptyTextColor = const Color(0xffe5e5e5),
       this.emptyIcon = Icons.reorder,
@@ -22,6 +22,6 @@ class EventStyle extends Model {
       this.descriptionColor = Colors.grey,
       this.dateTimeColor = Colors.grey});
 
-  static EventStyle of(BuildContext context) =>
-      ScopedModel.of<EventStyle>(context);
+  static EventOptions of(BuildContext context) =>
+      ScopedModel.of<EventOptions>(context);
 }

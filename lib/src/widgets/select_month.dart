@@ -3,14 +3,14 @@ import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/translator.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/style/select_month_style.dart';
+import 'package:flutter_event_calendar/src/models/style/select_month_options.dart';
 
 class SelectMonth extends StatelessWidget {
   late List months;
 
   Function onHeaderChanged;
 
-  MonthStyle? monthStyle;
+  MonthOptions? monthStyle;
 
   SelectMonth({required this.onHeaderChanged, this.monthStyle});
 

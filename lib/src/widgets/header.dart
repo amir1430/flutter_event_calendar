@@ -4,9 +4,9 @@ import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
-import 'package:flutter_event_calendar/src/models/style/select_month_style.dart';
-import 'package:flutter_event_calendar/src/models/style/select_year_style.dart';
+import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
+import 'package:flutter_event_calendar/src/models/style/select_month_options.dart';
+import 'package:flutter_event_calendar/src/models/style/select_year_options.dart';
 import 'package:flutter_event_calendar/src/widgets/select_month.dart';
 import 'package:flutter_event_calendar/src/widgets/select_year.dart';
 
@@ -68,9 +68,9 @@ class Header extends StatelessWidget {
                             builder: (BuildContext mmm) {
                               return SelectMonth(
                                 onHeaderChanged: onHeaderChanged,
-                                monthStyle: MonthStyle(
+                                monthStyle: MonthOptions(
                                   font: CalendarOptions.of(context).font,
-                                  selectedColor: DayStyle.of(context)
+                                  selectedColor: DayOptions.of(context)
                                       .selectedBackgroundColor,
                                 ),
                               );
@@ -82,7 +82,7 @@ class Header extends StatelessWidget {
                           child: Text(
                             '${CalendarUtils.getPartByString(
                               format: PartFormat.MONTH,
-                              options: HeaderStyle.of(context),
+                              options: HeaderOptions.of(context),
                             )}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
@@ -101,9 +101,9 @@ class Header extends StatelessWidget {
                             builder: (BuildContext mmm) {
                               return SelectYear(
                                 onHeaderChanged: onHeaderChanged,
-                                yearStyle: YearStyle(
+                                yearStyle: YearOptions(
                                   font: CalendarOptions.of(context).font,
-                                  selectedColor: DayStyle.of(context)
+                                  selectedColor: DayOptions.of(context)
                                       .selectedBackgroundColor,
                                 ),
                               );

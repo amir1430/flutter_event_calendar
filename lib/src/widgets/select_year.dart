@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/translator.dart';
-import 'package:flutter_event_calendar/src/models/style/select_year_style.dart';
+import 'package:flutter_event_calendar/src/models/style/select_year_options.dart';
 
 class SelectYear extends StatelessWidget {
   late List years;
 
   Function onHeaderChanged;
 
-  YearStyle? yearStyle;
+  YearOptions? yearStyle;
 
   SelectYear({required this.onHeaderChanged,this.yearStyle});
 

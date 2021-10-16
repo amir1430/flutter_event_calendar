@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
 import 'package:flutter_event_calendar/src/models/event.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
-import 'package:flutter_event_calendar/src/models/style/event_style.dart';
+import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
+import 'package:flutter_event_calendar/src/models/style/event_options.dart';
 import 'package:flutter_event_calendar/src/providers/calendars/calendar_provider.dart';
 import 'package:flutter_event_calendar/src/providers/instance_provider.dart';
 import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
@@ -13,11 +13,11 @@ import 'package:flutter_event_calendar/src/widgets/events.dart';
 import 'package:flutter_event_calendar/src/widgets/header.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-typedef CalendarChangeCallback = Function(EventDateTime);
+typedef CalendarChangeCallback = Function(CalendarDateTime);
 
 class EventCalendar extends StatefulWidget {
   static late CalendarProvider calendarProvider;
-  static late EventDateTime dateTime;
+  static late CalendarDateTime dateTime;
   static late List<Event> events;
   static List<Event> selectedEvents = [];
 
@@ -28,42 +28,36 @@ class EventCalendar extends StatefulWidget {
 
   CalendarChangeCallback? onChangeDateTime;
 
-  List<EventDateTime> disabledDays;
-
-  List<EventDateTime> enabledDays;
-
-  List<EventDateTime> colorizedDays;
+  List<CalendarDateTime> specialDays;
 
   CalendarOptions? calendarOptions;
 
-  DayStyle? dayStyle;
+  DayOptions? dayStyle;
 
-  EventStyle? eventStyle;
+  EventOptions? eventStyle;
 
-  HeaderStyle? headerStyle;
+  HeaderOptions? headerStyle;
 
-  Widget? Function(EventDateTime)? middleWidget;
+  Widget? Function(CalendarDateTime)? middleWidget;
 
   EventCalendar(
       {List<Event>? events,
-      EventDateTime? dateTime,
+      CalendarDateTime? dateTime,
       this.middleWidget,
       this.calendarOptions,
       this.dayStyle,
       this.eventStyle,
       this.headerStyle,
-      this.enabledDays = const [],
-      this.disabledDays = const [],
-      this.colorizedDays = const [],
+      this.specialDays = const [],
       this.onChangeDateTime,
       required calendarType,
       calendarLanguage}) {
     calendarProvider = createInstance(calendarType);
 
-    if (this.calendarOptions == null) this.calendarOptions = CalendarOptions();
-    if (this.headerStyle == null) this.headerStyle = HeaderStyle();
-    if (this.eventStyle == null) this.eventStyle = EventStyle();
-    if (this.dayStyle == null) this.dayStyle = DayStyle();
+    this.calendarOptions ??= CalendarOptions();
+    this.headerStyle ??= HeaderOptions();
+    this.eventStyle ??= EventOptions();
+    this.dayStyle ??= DayOptions();
 
     EventCalendar.events = events ?? [];
     EventCalendar.dateTime = dateTime ?? calendarProvider.getDateTime();
@@ -92,17 +86,13 @@ class _EventCalendarState extends State<EventCalendar> {
               ),
               isMonthlyView()
                   ? CalendarMonthly(
-                      disabledDays: widget.disabledDays,
-                      enabledDays: widget.enabledDays,
-                      colorizedDays: widget.colorizedDays,
+                      specialDays: widget.specialDays,
                       onCalendarChanged: () {
                         widget.onChangeDateTime?.call(EventCalendar.dateTime);
                         setState(() {});
                       })
                   : CalendarDaily(
-                      colorizedDays: widget.colorizedDays,
-                      disabledDays: widget.disabledDays,
-                      enabledDays: widget.enabledDays,
+                      specialDays: widget.specialDays,
                       onCalendarChanged: () {
                         widget.onChangeDateTime?.call(EventCalendar.dateTime);
                         setState(() {});
@@ -126,11 +116,11 @@ class _EventCalendarState extends State<EventCalendar> {
   buildScopeModels({required Container child}) {
     return ScopedModel<CalendarOptions>(
       model: widget.calendarOptions!,
-      child: ScopedModel<DayStyle>(
+      child: ScopedModel<DayOptions>(
         model: widget.dayStyle!,
-        child: ScopedModel<EventStyle>(
+        child: ScopedModel<EventOptions>(
           model: widget.eventStyle!,
-          child: ScopedModel<HeaderStyle>(
+          child: ScopedModel<HeaderOptions>(
             model: widget.headerStyle!,
             child: child,
           ),

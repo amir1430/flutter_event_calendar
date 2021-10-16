@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
 import 'package:flutter_event_calendar/src/models/event.dart';
-import 'package:flutter_event_calendar/src/models/style/event_style.dart';
+import 'package:flutter_event_calendar/src/models/style/event_options.dart';
 
 class EventCard extends StatelessWidget {
   Event fullCalendarEvent;
@@ -21,7 +21,7 @@ class EventCard extends StatelessWidget {
           fullCalendarEvent.onLongPress?.call(fullCalendarEvent.listIndex);
         }),
         child: Card(
-          color: EventStyle.of(context).backgroundColor,
+          color: EventOptions.of(context).backgroundColor,
           child: Container(
             padding: EdgeInsets.all(20),
             child: Column(
@@ -37,7 +37,7 @@ class EventCard extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
-                    color: EventStyle.of(context).titleColor,
+                    color: EventOptions.of(context).titleColor,
                     fontFamily: CalendarOptions.of(context).font,
                   ),
                 ),
@@ -51,7 +51,7 @@ class EventCard extends StatelessWidget {
                       : TextDirection.ltr,
                   style: TextStyle(
                     fontSize: 13,
-                    color: EventStyle.of(context).descriptionColor,
+                    color: EventOptions.of(context).descriptionColor,
                     fontFamily: CalendarOptions.of(context).font,
                   ),
                 ),
@@ -62,7 +62,7 @@ class EventCard extends StatelessWidget {
                   '${fullCalendarEvent.dateTime.toString()}',
                   style: TextStyle(
                     fontSize: 12,
-                    color: EventStyle.of(context).dateTimeColor,
+                    color: EventOptions.of(context).dateTimeColor,
                     fontFamily: CalendarOptions.of(context).font,
                   ),
                 ),

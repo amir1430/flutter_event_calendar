@@ -8,21 +8,21 @@ abstract class CalendarProvider {
 
   Map getMonthDaysShort(int index);
 
-  EventDateTime getNextMonthDateTime();
+  CalendarDateTime getNextMonthDateTime();
 
-  EventDateTime getPreviousMonthDateTime();
+  CalendarDateTime getPreviousMonthDateTime();
 
-  EventDateTime getNextDayDateTime();
+  CalendarDateTime getNextDayDateTime();
 
-  EventDateTime getPreviousDayDateTime();
+  CalendarDateTime getPreviousDayDateTime();
 
-  EventDateTime getDateTime();
+  CalendarDateTime getDateTime();
 
-  EventDateTime goToMonth(index);
+  CalendarDateTime goToMonth(index);
 
-  EventDateTime goToDay(index);
+  CalendarDateTime goToDay(index);
 
-  EventDateTime goToYear(int index);
+  CalendarDateTime goToYear(int index);
 
   int getDateTimePart(PartFormat format);
 

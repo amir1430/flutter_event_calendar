@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 
-class EventDateTime {
+class CalendarDateTime {
   int year;
   int month;
   int day;
+  int? toMonth;
+  int? toDay;
   int? hour;
   int? minute;
   int? second;
+  bool isEnableDay;
   Color? color;
 
-  EventDateTime({
-    required this.year,
-    required this.month,
-    required this.day,
-    this.hour,
-    this.minute,
-    this.second,
-    this.color});
+  CalendarDateTime(
+      {required this.year,
+      required this.month,
+      required this.day,
+      this.isEnableDay = false,
+      this.toMonth,
+      this.toDay,
+      this.hour,
+      this.minute,
+      this.second,
+      this.color});
 
   //supported format 1400-9-12 20:00(:50)
-  static EventDateTime? parse(String dateTime) {
+  static CalendarDateTime? parse(String dateTime) {
     final splitter = dateTime.split(" ");
     final datePart = splitter[0].split("-");
     final timePart = splitter[1].split(":");
 
     try {
-      return EventDateTime(
+      return CalendarDateTime(
         year: int.parse(datePart[0]),
         month: int.parse(datePart[1]),
         day: int.parse(datePart[2]),
@@ -39,7 +45,7 @@ class EventDateTime {
     }
   }
 
-  bool isDateEqual(EventDateTime dateTime) {
+  bool isDateEqual(CalendarDateTime dateTime) {
     return year == dateTime.year &&
         month == dateTime.month &&
         day == dateTime.day;
@@ -49,7 +55,7 @@ class EventDateTime {
     return this.year == year && this.month == month && this.day == day;
   }
 
-  bool isDateTimeEqual(EventDateTime dateTime) {
+  bool isDateTimeEqual(CalendarDateTime dateTime) {
     return year == dateTime.year &&
         month == dateTime.month &&
         day == dateTime.day &&
@@ -60,9 +66,7 @@ class EventDateTime {
   @override
   String toString() {
     if (hour != null && minute != null) {
-      return "$year/$month/$day $hour:$minute${second != null
-          ? ':$second'
-          : ''}";
+      return "$year/$month/$day $hour:$minute${second != null ? ':$second' : ''}";
     } else
       return "$year/$month/$day";
   }
