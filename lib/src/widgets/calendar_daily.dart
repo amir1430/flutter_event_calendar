@@ -124,6 +124,9 @@ class CalendarDaily extends StatelessWidget {
       final CalendarDateTime? specialDay =
       CalendarUtils.getFromSpecialDay(specialDays, currentYear, currentMonth, index);
 
+
+      BoxDecoration? decoration = _getDecoration(specialDay, currentYear, currentMonth, index);
+
       var selected = index == day ? true : false;
       days.add(Day(
         day: index,
@@ -132,7 +135,8 @@ class CalendarDaily extends StatelessWidget {
         ),
         dayStyle: DayStyle(
           mini: false,
-          enabled: specialDay?.isEnableDay ?? false,
+          decoration: decoration,
+          enabled: specialDay?.isEnableDay ?? true,
           selected: selected,
           useUnselectedEffect: true,
         ),
@@ -151,29 +155,30 @@ class CalendarDaily extends StatelessWidget {
 
     return days;
   }
+  BoxDecoration? _getDecoration(
+      CalendarDateTime? specialDay, curYear, int currMonth, day) {
+    BoxDecoration? decoration;
+    final isStartRange =
+    CalendarUtils.isStartOfRange(specialDay, curYear, currMonth, day);
+    final isEndRange =
+    CalendarUtils.isEndOfRange(specialDay, curYear, currMonth, day);
+    final isInRange =
+    CalendarUtils.isInRange(specialDay, curYear, currMonth, day);
 
-  // bool isEnabledDay(int cYear, int cMonth, int day) {
-  //   if (enabledDays.isEmpty) return true;
-  //   return enabledDays
-  //           .where(
-  //             (element) =>
-  //                 element.year == cYear &&
-  //                 element.month == cMonth &&
-  //                 element.day == day,
-  //           )
-  //           .length !=
-  //       0;
-  // }
-  //
-  // bool isDisabledDay(cYear, cMonth, int day) {
-  //   return disabledDays
-  //           .where(
-  //             (element) =>
-  //                 element.year == cYear &&
-  //                 element.month == cMonth &&
-  //                 element.day == day,
-  //           )
-  //           .length !=
-  //       0;
-  // }
+    if (isEndRange && isStartRange) {
+      decoration = BoxDecoration(
+          color: specialDay?.color, borderRadius: BorderRadius.circular(8));
+    } else if (isStartRange) {
+      decoration = BoxDecoration(
+          color: specialDay?.color,
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(8)));
+    } else if (isEndRange) {
+      decoration = BoxDecoration(
+          color: specialDay?.color,
+          borderRadius: BorderRadius.horizontal(left: Radius.circular(8)));
+    } else if (isInRange) {
+      decoration = BoxDecoration(color: specialDay?.color);
+    }
+    return decoration;
+  }
 }
