@@ -182,7 +182,7 @@ class Day extends StatelessWidget {
   _getTitleColor() {
     return dayStyle!.selected
         ? dayOptions!.weekDaySelectedColor
-        : (dayStyle?.decoration?.color ?? dayOptions!.weekDayUnselectedColor);
+        : dayOptions!.weekDayUnselectedColor;
   }
 
   _shouldHaveTransparentColor() {
