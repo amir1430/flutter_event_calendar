@@ -139,7 +139,7 @@ class Day extends StatelessWidget {
               bottom: HeaderOptions.of(context).weekDayStringType ==
                       WeekDayStringTypes.SHORT
                   ? (dayStyle!.mini ? 4 : 8)
-                  : 2),
+                  : 4),
           width: 5,
           height: 5,
           decoration: BoxDecoration(
@@ -161,8 +161,8 @@ class Day extends StatelessWidget {
   labelMaker(BuildContext context) {
     if (dayEvents.isEmpty) return Container();
     return Container(
-      margin: EdgeInsets.only(right: 2),
-      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      margin: EdgeInsets.only(right: dayStyle!.mini ? 8 : 0),
+      padding: EdgeInsets.symmetric(horizontal: dayStyle!.mini ? 4 : 6, vertical: 2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: dayOptions!.eventCounterColor,
@@ -173,7 +173,7 @@ class Day extends StatelessWidget {
             fontSize: 10,
             fontFamily: CalendarOptions.of(context).font,
             color: dayStyle!.useUnselectedEffect
-                ? dayOptions!.eventCounterTextColor
+                ? dayOptions!.eventCounterTextColor.withOpacity(opacity)
                 : dayOptions!.eventCounterTextColor),
       ),
     );
@@ -186,7 +186,7 @@ class Day extends StatelessWidget {
   }
 
   _shouldHaveTransparentColor() {
-    return dayStyle!.useUnselectedEffect || !dayStyle!.enabled;
+    return !dayStyle!.enabled || dayStyle!.useUnselectedEffect ;
   }
 }
 
