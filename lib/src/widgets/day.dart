@@ -112,7 +112,6 @@ class Day extends StatelessWidget {
       ),
     );
     // }
-    print("${opacity}");
     return Opacity(
       opacity: opacity,
       child: Container(
