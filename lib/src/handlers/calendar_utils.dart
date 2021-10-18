@@ -67,11 +67,17 @@ class CalendarUtils {
   static _isRange(CalendarDateTime element) =>
       element.toMonth != null || element.toDay != null;
 
-  static isEndOfRange(
-          CalendarDateTime? element, int year, int month, int day) =>
-      element?.year == year &&
-      (element?.toMonth == month || element?.month == month) &&
-      element?.toDay == day;
+  static isEndOfRange(CalendarDateTime? element, int year, int month, int day) {
+    if (element?.year != year) return false;
+    if (element?.toMonth == null) {
+      if (element?.toDay == null) return element?.day == day;
+      return element?.toDay == day;
+    }else if(element?.toMonth == month){
+      if (element?.toDay == null) return element?.day == day;
+      return element?.toDay == day;
+    }
+    return false;
+  }
 
   static isStartOfRange(
           CalendarDateTime? element, int year, int month, int day) =>
@@ -79,25 +85,23 @@ class CalendarUtils {
 
   static isInRange(
       CalendarDateTime? selectedDatetime, int year, int month, int day) {
-    if (selectedDatetime?.year != year)
-      return false;
+    if (selectedDatetime?.year != year) return false;
     if (selectedDatetime?.month != null && selectedDatetime!.month > month)
       return false;
     if (selectedDatetime?.toMonth != null && selectedDatetime!.toMonth! < month)
       return false;
-    if (selectedDatetime?.day != null && selectedDatetime!.month == month && selectedDatetime.day > day)
-      return false;
+    if (selectedDatetime?.day != null &&
+        selectedDatetime!.month == month &&
+        selectedDatetime.day > day) return false;
 
     if (selectedDatetime?.toMonth != null) {
       if (selectedDatetime!.toDay != null &&
           selectedDatetime.toMonth == month &&
-          selectedDatetime.toDay! < day)
-        return false;
-    }else{
+          selectedDatetime.toDay! < day) return false;
+    } else {
       if (selectedDatetime!.toDay != null &&
-          selectedDatetime.month == month &&
-          selectedDatetime.toDay! < day)
-        return false;
+          (selectedDatetime.month != month ||
+          selectedDatetime.toDay! < day)) return false;
     }
     return true;
   }
