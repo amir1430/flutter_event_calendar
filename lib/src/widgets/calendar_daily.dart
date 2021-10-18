@@ -4,6 +4,7 @@ import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
 import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
 import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
+import 'package:flutter_event_calendar/src/utils/style_provider.dart';
 import 'package:flutter_event_calendar/src/widgets/day.dart';
 
 class CalendarDaily extends StatelessWidget {
@@ -125,9 +126,10 @@ class CalendarDaily extends StatelessWidget {
       CalendarUtils.getFromSpecialDay(specialDays, currentYear, currentMonth, index);
 
 
-      BoxDecoration? decoration = _getDecoration(specialDay, currentYear, currentMonth, index);
+      BoxDecoration? decoration = StyleProvider.getSpecialDayDecoration(specialDay, currentYear, currentMonth, index);
 
-      var selected = index == day ? true : false;
+      var selected = index == day;
+
       days.add(Day(
         day: index,
         dayEvents: selector.getEventsByDayMonthYear(
@@ -138,7 +140,7 @@ class CalendarDaily extends StatelessWidget {
           decoration: decoration,
           enabled: specialDay?.isEnableDay ?? true,
           selected: selected,
-          useUnselectedEffect: true,
+          useUnselectedEffect: false,
         ),
         weekDay: weekDay,
         onCalendarChanged: () {

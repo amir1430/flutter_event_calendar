@@ -5,9 +5,6 @@ class CalendarMonthlyUtils extends CalendarUtils {
 
   static getYear(int month) {
     final year = CalendarUtils.getPartByInt(format: PartFormat.YEAR);
-    if (month > 12)
-      return year + 1;
-    else if (month < 1) return year - 1;
     return year;
   }
 

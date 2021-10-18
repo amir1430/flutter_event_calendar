@@ -9,6 +9,7 @@ import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
 import 'package:flutter_event_calendar/src/handlers/translator.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
 import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
+import 'package:flutter_event_calendar/src/utils/style_provider.dart';
 import 'package:flutter_event_calendar/src/widgets/day.dart';
 
 class CalendarMonthly extends StatefulWidget {
@@ -156,7 +157,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
         widget.specialDays, curYear, currMonth, day);
 
     BoxDecoration? decoration =
-        _getDecoration(specialDay, curYear, currMonth, day);
+        StyleProvider.getSpecialDayDecoration(specialDay, curYear, currMonth, day);
 
     return Day(
       dayEvents: eventSelector.getEventsByDayMonthYear(
@@ -185,7 +186,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
         CalendarUtils.getFromSpecialDay(widget.specialDays, year, month, day);
 
     BoxDecoration? decoration =
-    _getDecoration(specialDay, year, month, day);
+        StyleProvider.getSpecialDayDecoration(specialDay, year, month, day);
 
     return Day(
       day: day,
@@ -217,7 +218,7 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
         CalendarUtils.getFromSpecialDay(widget.specialDays, year, month, day);
 
     BoxDecoration? decoration =
-    _getDecoration(specialDay, year, month, day);
+        StyleProvider.getSpecialDayDecoration(specialDay, year, month, day);
 
     return Day(
       day: day,
@@ -238,32 +239,5 @@ class _CalendarMonthlyState extends State<CalendarMonthly> {
         widget.onCalendarChanged.call();
       },
     );
-  }
-
-  BoxDecoration? _getDecoration(
-      CalendarDateTime? specialDay, curYear, int currMonth, day) {
-    BoxDecoration? decoration;
-    final isStartRange =
-        CalendarUtils.isStartOfRange(specialDay, curYear, currMonth, day);
-    final isEndRange =
-        CalendarUtils.isEndOfRange(specialDay, curYear, currMonth, day);
-    final isInRange =
-        CalendarUtils.isInRange(specialDay, curYear, currMonth, day);
-
-    if (isEndRange && isStartRange) {
-      decoration = BoxDecoration(
-          color: specialDay?.color, borderRadius: BorderRadius.circular(8));
-    } else if (isStartRange) {
-      decoration = BoxDecoration(
-          color: specialDay?.color,
-          borderRadius: BorderRadius.horizontal(right: Radius.circular(8)));
-    } else if (isEndRange) {
-      decoration = BoxDecoration(
-          color: specialDay?.color,
-          borderRadius: BorderRadius.horizontal(left: Radius.circular(8)));
-    } else if (isInRange) {
-      decoration = BoxDecoration(color: specialDay?.color);
-    }
-    return decoration;
   }
 }
