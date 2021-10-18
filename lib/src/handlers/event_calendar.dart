@@ -62,7 +62,7 @@ class EventCalendar extends StatefulWidget {
     EventCalendar.events = events ?? [];
     EventCalendar.dateTime = dateTime ?? calendarProvider.getDateTime();
     EventCalendar.calendarType = calendarType ?? CalendarType.GREGORIAN;
-    EventCalendar.calendarLanguage = calendarLanguage ?? 'fa';
+    EventCalendar.calendarLanguage = calendarLanguage ?? 'en';
   }
 
   @override
