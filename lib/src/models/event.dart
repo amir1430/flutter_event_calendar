@@ -5,8 +5,6 @@ class Event {
   late String title;
   late String description;
   late CalendarDateTime dateTime;
-  CalendarDateTime? fromDateTime;
-  CalendarDateTime? toDateTime;
   late Function? onTap;
   late Function? onLongPress;
 
@@ -14,8 +12,6 @@ class Event {
     required this.title,
     String? description,
     required this.dateTime,
-    this.fromDateTime,
-    this.toDateTime,
     onTap(int listIndex)?,
     onLongPress,
   }) {
