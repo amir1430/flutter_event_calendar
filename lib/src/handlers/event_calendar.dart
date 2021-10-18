@@ -32,11 +32,11 @@ class EventCalendar extends StatefulWidget {
 
   CalendarOptions? calendarOptions;
 
-  DayOptions? dayStyle;
+  DayOptions? dayOptions;
 
-  EventOptions? eventStyle;
+  EventOptions? eventOptions;
 
-  HeaderOptions? headerStyle;
+  HeaderOptions? headerOptions;
 
   Widget? Function(CalendarDateTime)? middleWidget;
 
@@ -45,9 +45,9 @@ class EventCalendar extends StatefulWidget {
       CalendarDateTime? dateTime,
       this.middleWidget,
       this.calendarOptions,
-      this.dayStyle,
-      this.eventStyle,
-      this.headerStyle,
+      this.dayOptions,
+      this.eventOptions,
+      this.headerOptions,
       this.specialDays = const [],
       this.onChangeDateTime,
       required calendarType,
@@ -55,9 +55,9 @@ class EventCalendar extends StatefulWidget {
     calendarProvider = createInstance(calendarType);
 
     this.calendarOptions ??= CalendarOptions();
-    this.headerStyle ??= HeaderOptions();
-    this.eventStyle ??= EventOptions();
-    this.dayStyle ??= DayOptions();
+    this.headerOptions ??= HeaderOptions();
+    this.eventOptions ??= EventOptions();
+    this.dayOptions ??= DayOptions();
 
     EventCalendar.events = events ?? [];
     EventCalendar.dateTime = dateTime ?? calendarProvider.getDateTime();
@@ -117,11 +117,11 @@ class _EventCalendarState extends State<EventCalendar> {
     return ScopedModel<CalendarOptions>(
       model: widget.calendarOptions!,
       child: ScopedModel<DayOptions>(
-        model: widget.dayStyle!,
+        model: widget.dayOptions!,
         child: ScopedModel<EventOptions>(
-          model: widget.eventStyle!,
+          model: widget.eventOptions!,
           child: ScopedModel<HeaderOptions>(
-            model: widget.headerStyle!,
+            model: widget.headerOptions!,
             child: child,
           ),
         ),
