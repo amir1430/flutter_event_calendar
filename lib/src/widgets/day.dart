@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
 import 'package:flutter_event_calendar/src/models/calendar_options.dart';
 import 'package:flutter_event_calendar/src/models/style/headers_options.dart';
 
@@ -50,7 +49,7 @@ class Day extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          if (!dayStyle!.mini)
+          if (!dayStyle!.mini && dayOptions!.showWeekDay)
             FittedBox(
               child: Text(
                 '$weekDay',
@@ -62,7 +61,7 @@ class Day extends StatelessWidget {
                 ),
               ),
             ),
-          if (!dayStyle!.mini)
+          if (!dayStyle!.mini && dayOptions!.showWeekDay)
             SizedBox(
               height: 8,
             ),
@@ -70,7 +69,7 @@ class Day extends StatelessWidget {
             duration: Duration(milliseconds: 500),
             curve: Curves.ease,
             padding: dayStyle!.mini
-                ? EdgeInsets.all(0)
+                ? EdgeInsets.zero
                 : (EdgeInsets.all(HeaderOptions.of(context).weekDayStringType ==
                         WeekDayStringTypes.FULL
                     ? 4
@@ -95,16 +94,16 @@ class Day extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: dayOptions!.eventCounterViewType ==
-                          DayEventCounterViewType.DOT
-                      ? Alignment.bottomCenter
-                      : Alignment.bottomRight,
-                  child: dayOptions!.eventCounterViewType ==
-                          DayEventCounterViewType.DOT
-                      ? dotMaker(context)
-                      : labelMaker(context),
-                ),
+                dayOptions!.eventCounterViewType == DayEventCounterViewType.DOT
+                    ? Align(
+                        alignment: Alignment.bottomCenter,
+                        child: dotMaker(context),
+                      )
+                    : Positioned(
+                        right: -10,
+                        bottom: 0,
+                        child: labelMaker(context),
+                      ),
               ],
             ),
           ),
@@ -155,14 +154,18 @@ class Day extends StatelessWidget {
           ),
         );
     }
-    return Row(mainAxisSize: MainAxisSize.min, children: widgets);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: widgets,
+    );
   }
 
   labelMaker(BuildContext context) {
     if (dayEvents.isEmpty) return Container();
     return Container(
       margin: EdgeInsets.only(right: dayStyle!.mini ? 8 : 0),
-      padding: EdgeInsets.symmetric(horizontal: dayStyle!.mini ? 4 : 6, vertical: 2),
+      padding:
+          EdgeInsets.symmetric(horizontal: dayStyle!.mini ? 4 : 6, vertical: 2),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: dayOptions!.eventCounterColor,
@@ -186,7 +189,7 @@ class Day extends StatelessWidget {
   }
 
   _shouldHaveTransparentColor() {
-    return !dayStyle!.enabled || dayStyle!.useUnselectedEffect ;
+    return !dayStyle!.enabled || dayStyle!.useUnselectedEffect;
   }
 }
 
@@ -197,10 +200,11 @@ class DayStyle {
   final bool selected;
   final BoxDecoration? decoration;
 
-  const DayStyle(
-      {this.mini = false,
-      this.useUnselectedEffect = false,
-      this.enabled = false,
-      this.selected = false,
-      this.decoration = const BoxDecoration()});
+  const DayStyle({
+    this.mini = false,
+    this.useUnselectedEffect = false,
+    this.enabled = false,
+    this.selected = false,
+    this.decoration = const BoxDecoration(),
+  });
 }
