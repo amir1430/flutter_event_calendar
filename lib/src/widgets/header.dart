@@ -18,9 +18,9 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color:Colors.white,
+      color: Colors.transparent,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Directionality(
           textDirection: EventCalendar.calendarProvider.isRTL()
               ? TextDirection.rtl
@@ -45,6 +45,7 @@ class Header extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_forward_ios,
                           size: 18,
+                          color: HeaderOptions.of(context).navigationColor,
                         ),
                       ),
                     ),
@@ -87,6 +88,7 @@ class Header extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
+                              color: HeaderOptions.of(context).headerTextColor,
                               fontFamily: CalendarOptions.of(context).font,
                             ),
                           ),
@@ -115,6 +117,7 @@ class Header extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
+                            color: HeaderOptions.of(context).headerTextColor,
                             fontFamily: CalendarOptions.of(context).font,
                           ),
                         ),
@@ -126,7 +129,7 @@ class Header extends StatelessWidget {
               // if (!isInTodayIndex()) buildRefreshView(),
               Row(
                 children: [
-                  buildRefreshView(),
+                  buildRefreshView(context),
                   buildSelectViewType(context),
                   InkWell(
                     customBorder: CircleBorder(),
@@ -140,6 +143,7 @@ class Header extends StatelessWidget {
                       child: Icon(
                         Icons.arrow_forward_ios,
                         size: 18,
+                        color: HeaderOptions.of(context).navigationColor,
                       ),
                     ),
                   ),
@@ -157,7 +161,7 @@ class Header extends StatelessWidget {
         .isDateEqual(EventCalendar.calendarProvider.getDateTime());
   }
 
-  buildRefreshView() {
+  buildRefreshView(BuildContext context) {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 300),
       opacity: !isInTodayIndex() ? 1 : 0,
@@ -172,6 +176,7 @@ class Header extends StatelessWidget {
           child: Icon(
             Icons.restore,
             size: 24,
+            color: HeaderOptions.of(context).headerTextColor,
           ),
         ),
       ),
