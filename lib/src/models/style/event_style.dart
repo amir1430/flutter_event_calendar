@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class EventStyle extends Model {

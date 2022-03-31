@@ -1,6 +1,6 @@
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
+import '../../flutter_event_calendar.dart';
 
-class En{
+class En {
   static Map fullMonthNames = const {
     'en': {
       CalendarType.Jalali: [
@@ -16,7 +16,7 @@ class En{
         'Dey',
         'Bahman',
         'Esfand'
-    ],
+      ],
       CalendarType.Gregorian: [
         'January',
         'February',
@@ -34,37 +34,37 @@ class En{
     }
   };
   static Map shortMonthNames = const {
-  'en': {
-    CalendarType.Jalali: [
-      'Far',
-      'Ord',
-      'Kho',
-      'Tir',
-      'Mor',
-      'Sha',
-      'Mehr',
-      'Aban',
-      'Azar',
-      'Dey',
-      'Bah',
-      'Esf'
-    ],
-    CalendarType.Gregorian: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ]
-  }
-};
+    'en': {
+      CalendarType.Jalali: [
+        'Far',
+        'Ord',
+        'Kho',
+        'Tir',
+        'Mor',
+        'Sha',
+        'Mehr',
+        'Aban',
+        'Azar',
+        'Dey',
+        'Bah',
+        'Esf'
+      ],
+      CalendarType.Gregorian: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    }
+  };
 
   static Map fullDayNames = const {
     'en': {
@@ -76,8 +76,8 @@ class En{
         'Wednesday',
         'Thursday',
         'Friday',
-    ],
-    CalendarType.Gregorian: [
+      ],
+      CalendarType.Gregorian: [
         'Sunday',
         'Monday',
         'Tuesday',
@@ -85,9 +85,9 @@ class En{
         'Thursday',
         'Friday',
         'Saturday'
-    ]
-  }
-};
+      ]
+    }
+  };
   static Map shortDayNames = const {
     'en': {
       CalendarType.Jalali: ['Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'],
@@ -102,5 +102,5 @@ class En{
     }
   };
 
-  static Map  directionIsRTL = { 'en' : false };
+  static Map directionIsRTL = {'en': false};
 }

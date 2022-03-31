@@ -8,10 +8,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  shamsi_date: ^0.15.0
-  scoped_model: ^1.1.0
+  scoped_model: ^2.0.0-nullsafety.0
   flutter:
     sdk: flutter
+  shamsi_date: ^1.0.1
 
 dev_dependencies:
   flutter_test:

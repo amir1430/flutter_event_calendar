@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
-import 'package:flutter_event_calendar/src/handlers/translator.dart';
-import 'package:flutter_event_calendar/src/models/style/select_year_style.dart';
+import '../../flutter_event_calendar.dart';
+import '../handlers/calendar_utils.dart';
+import '../handlers/translator.dart';
+import '../models/style/select_year_style.dart';
 
 class SelectYear extends StatelessWidget {
   late List years;
@@ -11,14 +11,13 @@ class SelectYear extends StatelessWidget {
 
   YearStyle? yearStyle;
 
-  SelectYear({required this.onHeaderChanged,this.yearStyle});
+  SelectYear({required this.onHeaderChanged, this.yearStyle});
 
   ScrollController _scrollController = ScrollController();
 
   late VoidCallback scrollToPositionCallback;
 
-  final int selectedYear =
-      CalendarUtils.getPartByInt(format: PartFormat.year);
+  final int selectedYear = CalendarUtils.getPartByInt(format: PartFormat.year);
 
   late BoxDecoration selectedDecoration;
 

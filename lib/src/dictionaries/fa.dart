@@ -1,23 +1,23 @@
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
+import '../../flutter_event_calendar.dart';
 
 class Fa {
   static Map fullMonthNames = const {
     'fa': {
-      CalendarType.Jalali :[
-          'فروردین',
-          'اردیبهشت',
-          'خرداد',
-          'تیر',
-          'مرداد',
-          'شهریور',
-          'مهر',
-          'آبان',
-          'آذر',
-          'دی',
-          'بهمن',
-          'اسفند'
+      CalendarType.Jalali: [
+        'فروردین',
+        'اردیبهشت',
+        'خرداد',
+        'تیر',
+        'مرداد',
+        'شهریور',
+        'مهر',
+        'آبان',
+        'آذر',
+        'دی',
+        'بهمن',
+        'اسفند'
       ],
-    CalendarType.Gregorian: [
+      CalendarType.Gregorian: [
         'ژانویه',
         'فوریه',
         'مارس',
@@ -30,12 +30,12 @@ class Fa {
         'اکتبر',
         'نوامبر',
         'دسامبر'
-    ]
-  }
-};
+      ]
+    }
+  };
   static Map shortMonthNames = const {
-    'fa': { 
-      CalendarType.Jalali : [
+    'fa': {
+      CalendarType.Jalali: [
         'فرو',
         'ارد',
         'خرد',
@@ -48,7 +48,7 @@ class Fa {
         'دی',
         'بهم',
         'اسف'
-    ],
+      ],
       CalendarType.Gregorian: [
         'ژان',
         'قور',
@@ -62,12 +62,12 @@ class Fa {
         'اکت',
         'نوا',
         'دسا'
-    ],
-  } 
-};
+      ],
+    }
+  };
   static Map fullDayNames = const {
     'fa': {
-      CalendarType.Jalali  : [
+      CalendarType.Jalali: [
         'شنبه',
         'یکشنبه',
         'دوشنبه',
@@ -75,7 +75,7 @@ class Fa {
         'چهارشنبه',
         'پنج شنبه',
         'جمعه'
-    ],
+      ],
       CalendarType.Gregorian: [
         'یکشنبه',
         'دوشنبه',
@@ -84,13 +84,13 @@ class Fa {
         'پنجشنبه',
         'جمعه',
         'شنبه'
-    ],
-  }
-};
+      ],
+    }
+  };
   static Map shortDayNames = const {
-    'fa': { 
-      CalendarType.Jalali : ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'], 
-      CalendarType.Gregorian: ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش'] 
+    'fa': {
+      CalendarType.Jalali: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'],
+      CalendarType.Gregorian: ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش']
     }
   };
   static Map titles = const {

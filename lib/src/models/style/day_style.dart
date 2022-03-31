@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
+import '../../../flutter_event_calendar.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class DayStyle extends Model{
+class DayStyle extends Model {
   Color weekDaySelectedColor;
   Color weekDayUnselectedColor;
   Color selectedBackgroundColor;
@@ -20,11 +20,9 @@ class DayStyle extends Model{
       this.unselectedBackgroundColor = Colors.transparent,
       this.selectedTextColor = Colors.white,
       this.unselectedTextColor = Colors.black,
-      this.eventCounterColor =  Colors.red,
+      this.eventCounterColor = Colors.red,
       this.eventCounterViewType = DayEventCountViewType.LABEL,
       this.eventCounterTextColor = Colors.white});
 
-  static DayStyle of(BuildContext context) =>
-      ScopedModel.of<DayStyle>(context);
-
+  static DayStyle of(BuildContext context) => ScopedModel.of<DayStyle>(context);
 }

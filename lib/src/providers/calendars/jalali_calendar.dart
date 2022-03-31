@@ -1,9 +1,6 @@
-import 'dart:ui';
-
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/translator.dart';
-import 'package:flutter_event_calendar/src/providers/calendars/calendar_provider.dart';
-import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
+import '../../../flutter_event_calendar.dart';
+import '../../handlers/translator.dart';
+import 'calendar_provider.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class JalaliCalendar extends CalendarProvider {
@@ -53,7 +50,7 @@ class JalaliCalendar extends CalendarProvider {
   bool isRTL() => Translator.isRTL();
 
   @override
-  Map getMonthDays(WeekDayStringTypes type,int index) {
+  Map getMonthDays(WeekDayStringTypes type, int index) {
     Map days = {};
     Jalali firstDayOfMonth = _getSelectedDate().withMonth(index).withDay(1);
     int dayIndex = firstDayOfMonth.weekDay - 1;
@@ -95,7 +92,8 @@ class JalaliCalendar extends CalendarProvider {
   EventDateTime goToDay(index) {
     dynamic date = _getSelectedDate();
     final f = date.formatter;
-    return EventDateTime(year: int.parse(f.y), month: int.parse(f.mm), day: index);
+    return EventDateTime(
+        year: int.parse(f.y), month: int.parse(f.mm), day: index);
   }
 
   @override

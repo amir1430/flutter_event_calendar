@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
-import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/event.dart';
-import 'package:flutter_event_calendar/src/models/style/event_style.dart';
+import '../handlers/event_calendar.dart';
+import '../models/calendar_options.dart';
+import '../models/event.dart';
+import '../models/style/event_style.dart';
 
 class EventCard extends StatelessWidget {
   Event fullCalendarEvent;

@@ -1,7 +1,6 @@
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/translator.dart';
-import 'package:flutter_event_calendar/src/providers/calendars/calendar_provider.dart';
-import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
+import '../../../flutter_event_calendar.dart';
+import '../../handlers/translator.dart';
+import 'calendar_provider.dart';
 
 class GregorianCalendar extends CalendarProvider {
   @override

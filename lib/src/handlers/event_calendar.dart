@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/event.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
-import 'package:flutter_event_calendar/src/models/style/event_style.dart';
-import 'package:flutter_event_calendar/src/providers/calendars/calendar_provider.dart';
-import 'package:flutter_event_calendar/src/providers/instance_provider.dart';
-import 'package:flutter_event_calendar/src/utils/calendar_types.dart';
-import 'package:flutter_event_calendar/src/widgets/calendar_daily.dart';
-import 'package:flutter_event_calendar/src/widgets/calendar_monthly.dart';
-import 'package:flutter_event_calendar/src/widgets/events.dart';
+import '../../flutter_event_calendar.dart';
+import '../providers/calendars/calendar_provider.dart';
+import '../providers/instance_provider.dart';
+import '../widgets/calendar_daily.dart';
+import '../widgets/calendar_monthly.dart';
+import '../widgets/events.dart';
 import 'package:flutter_event_calendar/src/widgets/header.dart';
 import 'package:scoped_model/scoped_model.dart';
 

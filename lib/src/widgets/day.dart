@@ -1,10 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
-import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
+import '../../flutter_event_calendar.dart';
 
 class Day extends StatelessWidget {
   String weekDay;
@@ -40,8 +37,7 @@ class Day extends StatelessWidget {
     textColor = selected
         ? dayStyle.selectedTextColor
         : (_shouldHaveTransparentColor()
-            ? (color ?? dayStyle.unselectedTextColor)
-                .withOpacity(0.3)
+            ? (color ?? dayStyle.unselectedTextColor).withOpacity(0.3)
             : (color ?? dayStyle.unselectedTextColor));
 
     child = InkWell(
@@ -99,14 +95,14 @@ class Day extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: dayStyle.eventCounterViewType ==
-                          DayEventCountViewType.DOT
-                      ? Alignment.bottomCenter
-                      : Alignment.bottomRight,
-                  child: dayStyle.eventCounterViewType ==
-                          DayEventCountViewType.DOT
-                      ? dotMaker(context)
-                      : labelMaker(context),
+                  alignment:
+                      dayStyle.eventCounterViewType == DayEventCountViewType.DOT
+                          ? Alignment.bottomCenter
+                          : Alignment.bottomRight,
+                  child:
+                      dayStyle.eventCounterViewType == DayEventCountViewType.DOT
+                          ? dotMaker(context)
+                          : labelMaker(context),
                 ),
               ],
             ),

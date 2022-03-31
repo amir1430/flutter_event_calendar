@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
-import 'package:flutter_event_calendar/src/handlers/event_selector.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
-import 'package:flutter_event_calendar/src/widgets/day.dart';
+import '../../flutter_event_calendar.dart';
+import '../handlers/calendar_utils.dart';
+import '../handlers/event_selector.dart';
+import 'day.dart';
 
 class CalendarDaily extends StatelessWidget {
   Function? onCalendarChanged;
@@ -21,24 +19,21 @@ class CalendarDaily extends StatelessWidget {
       required this.colorizedDays,
       required this.disabledDays})
       : super() {
-    dayIndex =
-        CalendarUtils.getPartByInt(format: PartFormat.day);
+    dayIndex = CalendarUtils.getPartByInt(format: PartFormat.day);
   }
 
   @override
   Widget build(BuildContext context) {
     animatedTo = ScrollController(
-        initialScrollOffset:
-            (HeadersStyle.of(context).weekDayStringType ==
-                        WeekDayStringTypes.Full
-                    ? 80.0
-                    : 60.0) *
-                (dayIndex - 1));
+        initialScrollOffset: (HeadersStyle.of(context).weekDayStringType ==
+                    WeekDayStringTypes.Full
+                ? 80.0
+                : 60.0) *
+            (dayIndex - 1));
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animatedTo.animateTo(
-          (HeadersStyle.of(context).weekDayStringType ==
-                      WeekDayStringTypes.Full
+          (HeadersStyle.of(context).weekDayStringType == WeekDayStringTypes.Full
                   ? 80.0
                   : 60.0) *
               (dayIndex - 1),
@@ -110,17 +105,14 @@ class CalendarDaily extends StatelessWidget {
   }
 
   List<Widget> daysMaker(BuildContext context) {
-    final currentMonth =
-        CalendarUtils.getPartByInt(format: PartFormat.month);
-    final currentYear =
-        CalendarUtils.getPartByInt(format: PartFormat.year);
+    final currentMonth = CalendarUtils.getPartByInt(format: PartFormat.month);
+    final currentYear = CalendarUtils.getPartByInt(format: PartFormat.year);
 
     final headersStyle = HeadersStyle.of(context);
 
     List<Widget> days = [
       SizedBox(
-          width: headersStyle.weekDayStringType ==
-                  WeekDayStringTypes.Full
+          width: headersStyle.weekDayStringType == WeekDayStringTypes.Full
               ? 80
               : 60)
     ];
@@ -149,8 +141,7 @@ class CalendarDaily extends StatelessWidget {
     });
 
     days.add(SizedBox(
-        width: headersStyle.weekDayStringType ==
-                WeekDayStringTypes.Full
+        width: headersStyle.weekDayStringType == WeekDayStringTypes.Full
             ? 80
             : 60));
 

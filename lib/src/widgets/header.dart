@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_event_calendar/flutter_event_calendar.dart';
-import 'package:flutter_event_calendar/src/handlers/calendar_utils.dart';
-import 'package:flutter_event_calendar/src/handlers/event_calendar.dart';
-import 'package:flutter_event_calendar/src/models/calendar_options.dart';
-import 'package:flutter_event_calendar/src/models/style/headers_style.dart';
-import 'package:flutter_event_calendar/src/models/style/select_month_style.dart';
-import 'package:flutter_event_calendar/src/models/style/select_year_style.dart';
-import 'package:flutter_event_calendar/src/widgets/select_month.dart';
-import 'package:flutter_event_calendar/src/widgets/select_year.dart';
+import '../../flutter_event_calendar.dart';
+import '../handlers/calendar_utils.dart';
+import '../models/style/select_month_style.dart';
+import '../models/style/select_year_style.dart';
+import 'select_month.dart';
+import 'select_year.dart';
 
 class Header extends StatelessWidget {
   Function onHeaderChanged;
@@ -18,7 +14,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color:Colors.white,
+      color: Colors.white,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Directionality(
